@@ -7,62 +7,138 @@ A documentation framework built to just work.
 Write your docs. Configure what you need. Ship.
 
 ---
+# Changelog
 
-### 0.9.0 — Packaging & Scaffolding
+All notable changes to ctrl alt doc are documented here.
 
-ctrl alt doc is now structured as an actual framework package rather than a standalone documentation application.
+## 1.0.0 --- Documentation, without the baggage.
 
-The framework runtime, server-side document system, navigation, search, Markdown processing, icons, components, and framework stylesheet now live in `ctrl-alt-doc`, with the reference application consuming them as a package.
+The first stable release of ctrl alt doc.
 
-A `create-ctrlaltdoc` scaffolder has also been introduced. It generates a complete SvelteKit documentation project with the ctrl alt doc runtime, configuration, styling, routes, and starter documentation already wired together.
+ctrl alt doc is now a complete documentation framework with a packaged runtime,
+project scaffolder, built-in documentation components, search,
+navigation, icon system, and support for user-owned Svelte components
+directly inside Markdown.
 
-The generated project has been validated from a clean environment and successfully passes type checking and production builds using the packaged `ctrl-alt-doc` tarball.
+### Framework
 
-The intended authoring model is now taking shape:
+-   Established `ctrl-alt-doc` as the framework/runtime package.
+-   Established `create-ctrlaltdoc` as the project scaffolding CLI.
+-   Added stable public package entry points for framework
+    configuration, server utilities, Svelte components, framework
+    styles, and Vite integration.
+-   Kept generated projects thin: CAD manages the application while
+    users own their documentation, configuration, assets, and custom
+    styles.
 
-- `docs/` — your documentation
-- `ctrlaltdoc.config.ts` — your configuration
-- `custom.css` — your custom styling
-- everything else — ctrl alt doc-managed framework infrastructure
+### Project scaffolding
 
-The path toward the first stable release is now:
+-   Added `pnpm create ctrlaltdoc` project generation.
+-   Added a complete SvelteKit project template.
+-   Added generated API routes for search, navigation, suggestions, and
+    page metadata.
+-   Added required Hugeicons SSR configuration to generated projects.
+-   Synchronized bundled documentation between the reference application
+    and generated-project template.
 
-**Package → Scaffold → Validate → Release**
+### Markdown and documentation
 
-## Roadmap
+-   Added CAD Markdown extensions including callouts, Steps, Tabs,
+    cards, file trees, downloads, details, and syntax-highlighted code
+    blocks.
+-   Added table of contents generation.
+-   Added breadcrumbs and pagination.
+-   Added document discovery, metadata, excerpts, navigation, and
+    relative-link handling.
+-   Preserved ordinary Markdown authoring without requiring CAD-specific
+    file extensions.
 
-### 0.8.0 — Working Application
-The core documentation experience is working, including navigation, Markdown rendering, search, themes, callouts, cards, downloads, figures, file trees, and other documentation features.
+### Svelte components in Markdown
 
-### 0.9.0 — Packaging & Scaffolding
-**In progress**
+-   Added the `ctrl-alt-doc/vite` integration.
+-   Added support for importing Svelte components directly inside
+    ordinary `.md` documentation.
+-   Components resolve through the consuming project's normal
+    Svelte/Vite dependency graph.
+-   Component props and accessibility attributes are preserved.
+-   Existing CAD Markdown processing remains intact.
+-   Existing documents require no syntax changes.
+-   User-owned icon/component packages remain user dependencies rather
+    than CAD dependencies.
+-   Invalid or missing component imports produce normal build errors.
 
-ctrl alt doc is becoming a distributable framework rather than an application template.
+Example:
 
-- Framework runtime extracted into `ctrl-alt-doc`
-- Server runtime packaged and consumed through `ctrl-alt-doc/server`
-- Framework components packaged and consumed through `ctrl-alt-doc/components`
-- Framework stylesheet exposed as a package asset
-- Reference application migrated to consume the framework package
-- Local framework implementation removed from the reference application
-- `create-ctrlaltdoc` scaffolder introduced
-- Generated projects receive the complete SvelteKit application shell
-- Project name is applied automatically during scaffolding
-- Fresh generated projects validated with install, type-check, and production build
-- Packaged `ctrl-alt-doc` artifacts validated outside the workspace
-- Release packaging and public distribution still to be completed
+``` svelte
+<script>
+    import AcademicCapIcon from '@iconify-svelte/heroicons/academic-cap';
+</script>
 
-### 1.0.0 — First Stable Release
-The first stable release will arrive when a new project can be created, configured, documented, built, and deployed without requiring changes to ctrl alt doc's internal framework code.
+<AcademicCapIcon height="1em" />
+```
 
-**North star:**  
-> ctrl alt doc manages the application. You manage the documentation.
+### Icons
 
----
+-   Added the built-in Hugeicons Stroke Rounded icon system.
+-   Added built-in interface, documentation, and social icons.
+-   Added native built-in icon reference documentation.
+-   Added GitHub, X, Discord, Instagram, YouTube, LinkedIn, Twitch,
+    Reddit, and Bluesky brand icons.
+-   Preserved `icons?: Record<string, string>` for custom SVG icons used
+    by framework-owned icon slots.
+-   Kept document-authored Svelte components separate from
+    framework-owned icon resolution.
 
-### Projects
+### Search
 
-- **ctrl alt doc** — the documentation framework
-- **Website** — the ctrl alt doc project website
+-   Added server-side documentation search.
+-   Search covers document titles, descriptions, and rendered document
+    content.
+-   Added keyboard access with `/` and `Ctrl/Cmd + K`.
+-   Added keyboard result navigation and selection.
+-   Added generated-project search API support.
 
-More coming as the project develops.
+### Navigation and interface
+
+-   Added collapsible documentation navigation.
+-   Added independent category collapse state.
+-   Collapsed categories remain collapsed when navigating to an active
+    document inside them.
+-   Added responsive sidebar behaviour.
+-   Added theme support and navigation branding/social configuration.
+-   Added configurable footer content and links.
+
+### Validation
+
+The `1.0.0` release candidate was validated from its distributable
+packages rather than only from the development monorepo.
+
+Validation included:
+
+-   fresh project scaffolding from the packed `1.0.0` CLI
+-   installation of the packed `ctrl-alt-doc` package
+-   external `@iconify-svelte/heroicons` installation
+-   Svelte component imports from Markdown
+-   SSR compilation
+-   production builds
+-   all 22 bundled Markdown routes
+-   search API
+-   navigation API
+-   suggestions API
+-   page metadata API
+-   TypeScript checks
+-   Svelte checks
+-   Prettier
+-   ESLint
+-   package tarball contents
+-   CLI tarball installation and scaffolding
+
+The live and scaffold documentation sets are synchronized at 24 files.
+
+### Release status
+
+ctrlaltdoc `1.0.0` marks the feature-freeze boundary for the first stable
+release.
+
+Further framework features are deferred to post-1.0 development.
+
