@@ -7,138 +7,101 @@ A documentation framework built to just work.
 Write your docs. Configure what you need. Ship.
 
 ---
+
 # Changelog
 
-All notable changes to ctrl alt doc are documented here.
+## v1.0.2
 
-## 1.0.0 --- Documentation, without the baggage.
+This release improves navigation, documentation cards, external links, serverless deployment,
+development asset handling, and package update visibility.
 
-The first stable release of ctrl alt doc.
+### Added
 
-ctrl alt doc is now a complete documentation framework with a packaged runtime,
-project scaffolder, built-in documentation components, search,
-navigation, icon system, and support for user-owned Svelte components
-directly inside Markdown.
+- Added `New`, `Updated`, and `Beta` badges.
+- Page badges now appear in sidebar navigation.
+- Page badges now appear on generated documentation cards.
+- Category badges can be configured through `_category.yml`.
+- Added automatic package update notifications during `npm run dev`.
+- Update notifications detect npm, pnpm, Yarn, and Bun.
+- Added `ExternalLinkIcon` to external Markdown links, cards, and footer links.
+- Added documentation covering badges, external links, documentation cards, and update notifications.
+- Added build-time documentation bundling for serverless and edge deployments.
 
-### Framework
+### Fixes in place
 
--   Established `ctrl-alt-doc` as the framework/runtime package.
--   Established `create-ctrlaltdoc` as the project scaffolding CLI.
--   Added stable public package entry points for framework
-    configuration, server utilities, Svelte components, framework
-    styles, and Vite integration.
--   Kept generated projects thin: CAD manages the application while
-    users own their documentation, configuration, assets, and custom
-    styles.
+- Fixed `:::doc-cards` rendering an empty container on the homepage.
+- Direct child directories containing an `index.md` document now appear as homepage documentation cards.
+- Fixed homepage slug normalization in the Svelte-aware Vite transform.
+- Fixed access to project-root assets such as `custom.css` during local development.
+- Fixed Cloudflare Workers deployments requiring the source `docs/` directory at runtime.
+- Fixed transient missing-file errors during replace-style Markdown saves in Vite development.
+- Preserved existing documentation-card styling and Markdown behavior.
+- External web links now open in a new tab.
+- External links now include `rel="noopener noreferrer"`.
+- Internal links and heading links continue to open in the current tab.
 
-### Project scaffolding
+### Update notifications
 
--   Added `pnpm create ctrlaltdoc` project generation.
--   Added a complete SvelteKit project template.
--   Added generated API routes for search, navigation, suggestions, and
-    page metadata.
--   Added required Hugeicons SSR configuration to generated projects.
--   Synchronized bundled documentation between the reference application
-    and generated-project template.
+When a newer version is available, running the development server now displays an update notice:
 
-### Markdown and documentation
-
--   Added CAD Markdown extensions including callouts, Steps, Tabs,
-    cards, file trees, downloads, details, and syntax-highlighted code
-    blocks.
--   Added table of contents generation.
--   Added breadcrumbs and pagination.
--   Added document discovery, metadata, excerpts, navigation, and
-    relative-link handling.
--   Preserved ordinary Markdown authoring without requiring CAD-specific
-    file extensions.
-
-### Svelte components in Markdown
-
--   Added the `ctrl-alt-doc/vite` integration.
--   Added support for importing Svelte components directly inside
-    ordinary `.md` documentation.
--   Components resolve through the consuming project's normal
-    Svelte/Vite dependency graph.
--   Component props and accessibility attributes are preserved.
--   Existing CAD Markdown processing remains intact.
--   Existing documents require no syntax changes.
--   User-owned icon/component packages remain user dependencies rather
-    than CAD dependencies.
--   Invalid or missing component imports produce normal build errors.
-
-Example:
-
-``` svelte
-<script>
-    import AcademicCapIcon from '@iconify-svelte/heroicons/academic-cap';
-</script>
-
-<AcademicCapIcon height="1em" />
+```text
+┌  ctrl alt doc update available
+│
+│  1.0.1 → 1.0.2
+│
+│  Run: npm update ctrl-alt-doc
+└
 ```
 
-### Icons
+The update check:
 
--   Added the built-in Hugeicons Stroke Rounded icon system.
--   Added built-in interface, documentation, and social icons.
--   Added native built-in icon reference documentation.
--   Added GitHub, X, Discord, Instagram, YouTube, LinkedIn, Twitch,
-    Reddit, and Bluesky brand icons.
--   Preserved `icons?: Record<string, string>` for custom SVG icons used
-    by framework-owned icon slots.
--   Kept document-authored Svelte components separate from
-    framework-owned icon resolution.
+- runs only during local development
+- runs at most once every 24 hours
+- does not delay development-server startup
+- fails silently when the npm registry is unavailable
+- is disabled automatically in CI
+- never runs during production builds
 
-### Search
+Disable it manually with:
 
--   Added server-side documentation search.
--   Search covers document titles, descriptions, and rendered document
-    content.
--   Added keyboard access with `/` and `Ctrl/Cmd + K`.
--   Added keyboard result navigation and selection.
--   Added generated-project search API support.
+```bash
+CTRL_ALT_DOC_DISABLE_UPDATE_CHECK=1 npm run dev
+```
 
-### Navigation and interface
+### Package versions
 
--   Added collapsible documentation navigation.
--   Added independent category collapse state.
--   Collapsed categories remain collapsed when navigating to an active
-    document inside them.
--   Added responsive sidebar behaviour.
--   Added theme support and navigation branding/social configuration.
--   Added configurable footer content and links.
+This release is distributed through:
 
-### Validation
+- `ctrl-alt-doc@1.0.2`
+- `create-ctrlaltdoc@1.0.3`
 
-The `1.0.0` release candidate was validated from its distributable
-packages rather than only from the development monorepo.
+The intermediate `create-ctrlaltdoc@1.0.2` release was deprecated because npm removed its executable metadata during publication. Use `1.0.3` or newer.
 
-Validation included:
+### Updating an existing project
 
--   fresh project scaffolding from the packed `1.0.0` CLI
--   installation of the packed `ctrl-alt-doc` package
--   external `@iconify-svelte/heroicons` installation
--   Svelte component imports from Markdown
--   SSR compilation
--   production builds
--   all 22 bundled Markdown routes
--   search API
--   navigation API
--   suggestions API
--   page metadata API
--   TypeScript checks
--   Svelte checks
--   Prettier
--   ESLint
--   package tarball contents
--   CLI tarball installation and scaffolding
+With npm:
 
-The live and scaffold documentation sets are synchronized at 24 files.
+```bash
+npm install ctrl-alt-doc@latest
+```
 
-### Release status
+With pnpm:
 
-ctrlaltdoc `1.0.0` marks the feature-freeze boundary for the first stable
-release.
+```bash
+pnpm update ctrl-alt-doc@latest
+```
 
-Further framework features are deferred to post-1.0 development.
+Restart the development server after updating.
 
+You do not need to update `create-ctrlaltdoc` in an existing project. The scaffolder is only used when creating a new project.
+
+---
+
+## v1.0.1
+
+### Repaired
+
+- Allowed generated projects to serve project-root assets during development.
+- Fixed Vite filesystem allow-list errors affecting `custom.css`.
+- Confirmed the issue only affected the development server and HMR.
+- Production builds and deployed output were unaffected.
