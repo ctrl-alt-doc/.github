@@ -1,4 +1,10 @@
-# ctrl alt doc
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/simongrieve/images/blob/567281165ddca0933f45e84aa5f947194ca662b3/doc-dark-mode-128.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/simongrieve/images/blob/567281165ddca0933f45e84aa5f947194ca662b3/doc-light-mode-128.png">
+  <img alt="Fallback image description" src="default-image.png">
+</picture>
+
+## ctrl alt doc
 
 **Documentation, without the baggage.**
 
@@ -6,47 +12,15 @@ A documentation framework built to just work.
 
 Write your docs. Configure what you need. Ship.
 
----
+***
 
-# Changelog
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/simongrieve/images/blob/d934c2fc1b4c36fc66e5afb2e3082e5546ccb43b/mark-dark-mode-128.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/simongrieve/images/blob/d934c2fc1b4c36fc66e5afb2e3082e5546ccb43b/mark-light-mode-128.png">
+  <img alt="Fallback image description" src="default-image.png">
+</picture>
 
-## v1.0.4
+## ctrl alt bot
 
-### Fixed
-
-- Fixed imported Svelte components not rendering inside Markdown table cells.
-- Added regression coverage for Svelte component placeholders in tables.
-- Preserved normal inline Markdown formatting within table cells.
-
-### Installation
-
-```bash
-npm install ctrl-alt-doc@1.0.4
-```
-
-## v1.0.3
-
-### Added
-
-- Added GitHub Packages publishing for the framework and project creator packages.
-- Added generated-project support for the updated bundled documentation and template presentation.
-- Added improved installation guidance and template examples.
-
-### Fixed
-
-- Fixed duplicate heading links in the table of contents.
-- Fixed route-level TOCs drifting from the renderer-generated heading IDs.
-- Improved development hot-reload handling while Markdown files are being saved.
-- Updated the production workflow to use Node.js 22.
-
-### Improved
-
-- Refined the bundled documentation layout and visual presentation.
-- Improved Steps documentation and examples.
-- Improved generated-project route and document handling.
-- Updated package metadata and GitHub repository links.
-
-### Installation
-
-```bash
-npm install ctrl-alt-doc@1.0.3
+The Discord companion for ctrl alt doc. It lets people search and read a ctrl alt doc documentation site without leaving Discord.
+**ctrl alt doc** remains responsible for finding documents, resolving slugs, and maintaining the documentation collection. The bot does not duplicate ctrl alt doc’s search or document logic.
