@@ -21,6 +21,6 @@ Write your docs. Configure what you need. Ship.
 </picture>
 
 ## ctrl alt bot
-**Your Docs, in Discord
+**Your Docs, in Discord**
 
 The Discord companion for ctrl alt doc. Ask a question and get the section of your documentation that answers it, with the text, the code, and a link straight to the heading.
