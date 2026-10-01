@@ -21,6 +21,6 @@ Write your docs. Configure what you need. Ship.
 </picture>
 
 ## ctrl alt bot
+**Your Docs, in Discord
 
-The Discord companion for ctrl alt doc. It lets people search and read a ctrl alt doc documentation site without leaving Discord.
-**ctrl alt doc** remains responsible for finding documents, resolving slugs, and maintaining the documentation collection. The bot does not duplicate ctrl alt doc’s search or document logic.
+The Discord companion for ctrl alt doc. Ask a question and get the section of your documentation that answers it, with the text, the code, and a link straight to the heading.
